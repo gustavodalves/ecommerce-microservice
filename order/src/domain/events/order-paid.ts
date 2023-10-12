@@ -5,7 +5,7 @@ import { OrderStatus } from '../entities/order';
 export class OrderPaid implements DomainEvent {
     readonly eventVersion: number = 1;
     readonly occurredOn = new Date();
-    readonly eventName = 'OrderCreated';
+    readonly eventName = 'OrderPaid';
 
     constructor(
         readonly aggregateId: string,

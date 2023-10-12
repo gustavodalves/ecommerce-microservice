@@ -29,5 +29,6 @@ export default class RabbitMQQueueAdapter implements Queue {
         const channel = await this.connection.createChannel();
         await channel.assertQueue(event.name, { durable: true });
         channel.sendToQueue(event.name, Buffer.from(JSON.stringify(event)));
+        await channel.close();
     }
 }

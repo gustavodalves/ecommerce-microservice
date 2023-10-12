@@ -5,7 +5,7 @@ import { TransactionStatus } from '../entities/Transaction';
 export default class OrderCreated implements DomainEvent {
     occurredOn = new Date();
     eventVersion = 1;
-    name = 'OrderCreated';
+    name = 'OrderCreated2';
 
     constructor (
         readonly aggregateId: string,

@@ -16,5 +16,7 @@ export class DomainEventManagerAdapter implements DomainEventManager {
         for (const event of aggregateRoot.getEvents()) {
             await this.queue.publish(event);
         }
+
+        aggregateRoot.clearEvents();
     }
 }

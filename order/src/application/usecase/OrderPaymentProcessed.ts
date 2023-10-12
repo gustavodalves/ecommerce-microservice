@@ -9,9 +9,9 @@ export default class OrderPaymentProcessed {
 
     async execute(input: Input) {
         const order = await this.orderRepository.getById(input.orderId);
-        order.status === 1 ? order.confirmPay() : order.cancel();
-        this.eventManager.publish(order);
+        input.status === 1 ? order.confirmPay() : order.cancel();
         this.orderRepository.update(order);
+        this.eventManager.publish(order);
     }
 }
 

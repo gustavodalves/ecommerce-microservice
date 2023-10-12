@@ -3,10 +3,14 @@ import Entity from './entity';
 import UUID from './object-values/uuid';
 
 export default abstract class AggregateRoot extends Entity {
-    protected readonly events: DomainEvent[] = [];
+    protected events: DomainEvent[] = [];
 
     getEvents() {
         return this.events;
+    }
+
+    clearEvents() {
+        this.events = [];
     }
 
     addEvent(event: DomainEvent) {

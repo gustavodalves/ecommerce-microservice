@@ -9,7 +9,7 @@ export default class QueueController {
         readonly queue: Queue,
         processPayment: ProcessPayment
     ) {
-        queue.on('OrderCreated', async function (event: Replace<OrderCreated, {
+        queue.on('OrderPaid', async function (event: Replace<OrderCreated, {
             aggregateId: string
         }>) {
             await processPayment.execute({
