@@ -3,8 +3,8 @@ import UUID from '../../core/building-blocks/object-values/uuid';
 import PaymentProcessed from '../events/PaymentProcessed';
 
 export enum TransactionStatus {
-    CONFIRMED,
-    RECUSED,
+    CONFIRMED = 1,
+    RECUSED = 2,
 }
 
 export default class Transaction extends AggregateRoot {

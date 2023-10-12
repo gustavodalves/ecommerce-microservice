@@ -12,6 +12,7 @@ export default class QueueController {
         queue.on('OrderPaid', async function (event: Replace<OrderCreated, {
             aggregateId: string
         }>) {
+
             await processPayment.execute({
                 creditCardToken: event.creditCardToken,
                 orderId: event.aggregateId,

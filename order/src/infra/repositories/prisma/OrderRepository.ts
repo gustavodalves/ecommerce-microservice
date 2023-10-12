@@ -24,12 +24,14 @@ export default class PrismaOrderRepository implements OrderRepository {
         if(!raw) { throw new Error('order not exists'); }
 
         return new Order({
+            id: orderId,
             products: raw.cart.products!.map(item => new Product(
                 item.name,
                 item.description,
                 item.price,
                 item.id
-            ))
+            )),
+
         });
     }
 

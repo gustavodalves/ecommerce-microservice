@@ -23,7 +23,7 @@ export default class ProcessPayment {
             transaction
         );
 
-        output.status === 0 ? transaction.approve() : transaction.recuse();
+        output.status === 1 ? transaction.approve() : transaction.recuse();
         await this.transactionRepository.save(transaction);
 
         await domainService.finish();

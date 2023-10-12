@@ -56,6 +56,8 @@ export class Order extends AggregateRoot {
     }
 
     pay(cardToken: string) {
+        if(this.status === OrderStatus.PROCESSING) throw new Error('order in payment processing');
+        if(this.status === OrderStatus.PAID) throw new Error('order already paid');
         this.status = OrderStatus.PROCESSING;
         this.addEvent(new OrderPaid(this.id.getValue(), this.status, cardToken, this.amount));
     }
