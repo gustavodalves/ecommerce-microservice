@@ -1,15 +1,12 @@
-import Entity from '../../core/building-blocks/entity';
 import UUID from '../../core/building-blocks/object-values/uuid';
 import Product from './product';
 
-export default class Cart extends Entity {
+export default class Cart {
     products: Product[];
 
     constructor(
         products: Product[],
-        id?: UUID | string,
     ) {
-        super(id);
         this.products = products;
     }
 
