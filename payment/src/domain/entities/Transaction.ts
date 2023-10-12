@@ -12,18 +12,19 @@ export default class Transaction extends AggregateRoot {
         super();
     }
 
-    static create (orderId: UUID, tid: string, price: number, status: TransactionStatus) {
-        return new Transaction(new UUID(), orderId, tid, price, status);
+    static create (orderId: string, tid: string, price: number, status: TransactionStatus) {
+        return new Transaction(new UUID(), new UUID(orderId), tid, price, status);
+
     }
 
     approve() {
         this.status = TransactionStatus.CONFIRMED;
         this.addEvent(
             new PaymentProcessed(
-                this.id,
+                this.id.getValue(),
                 this.price,
                 this.status,
-                this.orderId
+                this.orderId.getValue()
             )
         );
     }
@@ -32,10 +33,10 @@ export default class Transaction extends AggregateRoot {
         this.status = TransactionStatus.RECUSED;
         this.addEvent(
             new PaymentProcessed(
-                this.id,
+                this.id.getValue(),
                 this.price,
                 this.status,
-                this.orderId
+                this.orderId.getValue()
             )
         );
     }

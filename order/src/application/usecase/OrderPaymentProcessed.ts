@@ -1,7 +1,7 @@
 import DomainEventManager from '../../domain/application/EventManager';
 import OrderRepository from '../../domain/repositories/order';
 
-export default class PurchaseOrder {
+export default class OrderPaymentProcessed {
     constructor(
         private readonly orderRepository: OrderRepository,
         private readonly eventManager: DomainEventManager
@@ -9,13 +9,10 @@ export default class PurchaseOrder {
 
     async execute(input: Input) {
         const order = await this.orderRepository.getById(input.orderId);
-        order.pay(input.cardToken);
-        await this.eventManager.publish(order);
+        order.status === 1 ? order.confirmPay() : order.cancel();
+        this.eventManager.publish(order);
         this.orderRepository.update(order);
     }
 }
 
-type Input = {
-    orderId: string,
-    cardToken: string
-}
+type Input = { orderId: string, status: number }

@@ -23,7 +23,7 @@ export type OrderConstructorProps = {
 
 export class Order extends AggregateRoot {
     id: OrderId;
-    amount: number;
+    amount = 0;
     status: OrderStatus = OrderStatus.PENDING;
     cart: Cart;
 
@@ -41,7 +41,7 @@ export class Order extends AggregateRoot {
         const order = new Order(props);
         order.addEvent(
             new OrderCreated(
-                order.id,
+                order.id.getValue(),
                 order.amount,
                 order.status,
                 order.getTotal()
@@ -54,18 +54,18 @@ export class Order extends AggregateRoot {
         return this.cart.getTotal();
     }
 
-    pay() {
+    pay(cardToken: string) {
         this.status = OrderStatus.PROCESSING;
-        this.addEvent(new OrderPaid(this.id, this.status));
+        this.addEvent(new OrderPaid(this.id.getValue(), this.status, cardToken, this.amount));
     }
 
     confirmPay() {
         this.status = OrderStatus.PAID;
-        this.addEvent(new OrderPayConfirmed(this.id, this.status));
+        this.addEvent(new OrderPayConfirmed(this.id.getValue(), this.status));
     }
 
     cancel() {
         this.status = OrderStatus.CANCELLED;
-        this.addEvent(new OrderCancelled(this.id, this.status));
+        this.addEvent(new OrderCancelled(this.id.getValue(), this.status));
     }
 }

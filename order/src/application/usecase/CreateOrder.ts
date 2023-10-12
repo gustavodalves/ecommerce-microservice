@@ -1,14 +1,14 @@
-import { Order } from '../../core/domain/entities/order';
-import Product from '../../core/domain/entities/product';
-import OrderRepository from '../../core/domain/repositories/order';
-import ProductRepository from '../../core/domain/repositories/product';
-import Queue from '../protocols/Queue';
+import OrderRepository from '../../domain/repositories/order';
+import ProductRepository from '../../domain/repositories/product';
+import { Order } from '../../domain/entities/order';
+import Product from '../../domain/entities/product';
+import DomainEventManager from '../../domain/application/EventManager';
 
-export default class Purchase {
+export default class CreateOrder {
     constructor(
         private readonly orderRepository: OrderRepository,
         private readonly productRepository: ProductRepository,
-        private readonly queue: Queue
+        private readonly eventManager: DomainEventManager
     ) {}
 
     async execute(
@@ -20,13 +20,13 @@ export default class Purchase {
             const product = await this.productRepository.getById(productId);
             products.push(product);
         }
+
         const order = Order.create({
             products,
         });
 
-        for (const event of order.getEvents()) {
-            this.queue.publish(event);
-        }
+        this.eventManager.publish(order);
+        this.orderRepository.save(order);
     }
 }
 

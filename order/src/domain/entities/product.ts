@@ -30,7 +30,7 @@ export default class Product extends AggregateRoot {
 
         product.addEvent(
             new CreateProduct(
-                product.id,
+                product.id.getValue(),
                 product.name,
                 product.description,
                 product.price
@@ -50,7 +50,7 @@ export default class Product extends AggregateRoot {
         this.price = price;
         this.addEvent(
             new ChangePriceProduct(
-                this.id,
+                this.id.getValue(),
                 this.price
             )
         );

@@ -5,9 +5,10 @@ import { OrderStatus } from '../entities/order';
 export class OrderCancelled implements DomainEvent {
     readonly eventVersion: number = 1;
     readonly occurredOn = new Date();
+    public readonly eventName = 'OrderCancelled';
 
     constructor(
-        readonly aggregateId: UUID,
+        readonly aggregateId: string,
         readonly status: OrderStatus
     ) {}
 }

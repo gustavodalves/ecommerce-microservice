@@ -1,11 +1,9 @@
-import Product from '../../core/domain/entities/product';
-import ProductRepository from '../../core/domain/repositories/product';
-import Queue from '../protocols/Queue';
+import Product from '../../domain/entities/product';
+import ProductRepository from '../../domain/repositories/product';
 
 export default class CreateProduct {
     constructor(
         private readonly productRepository: ProductRepository,
-        private readonly queue: Queue
     ) {}
 
     async execute(
@@ -18,10 +16,6 @@ export default class CreateProduct {
         });
 
         await this.productRepository.save(product);
-
-        for (const event of product.getEvents()) {
-            this.queue.publish(event);
-        }
     }
 }
 

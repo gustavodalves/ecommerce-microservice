@@ -4,5 +4,5 @@ export default interface DomainEvent {
     name: string
     eventVersion: number
     occurredOn: Date
-    aggregateId: UUID
+    aggregateId: string
 }
