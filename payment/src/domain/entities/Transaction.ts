@@ -1,7 +1,6 @@
 import AggregateRoot from '../../core/building-blocks/aggregate-root';
 import UUID from '../../core/building-blocks/object-values/uuid';
-import PaymentApproved from '../events/PaymentApproved';
-import PaymentRecused from '../events/PaymentRecused';
+import PaymentProcessed from '../events/PaymentProcessed';
 
 export enum TransactionStatus {
     CONFIRMED,
@@ -20,7 +19,7 @@ export default class Transaction extends AggregateRoot {
     approve() {
         this.status = TransactionStatus.CONFIRMED;
         this.addEvent(
-            new PaymentApproved(
+            new PaymentProcessed(
                 this.id,
                 this.price,
                 this.status,
@@ -32,7 +31,7 @@ export default class Transaction extends AggregateRoot {
     recuse() {
         this.status = TransactionStatus.RECUSED;
         this.addEvent(
-            new PaymentRecused(
+            new PaymentProcessed(
                 this.id,
                 this.price,
                 this.status,
