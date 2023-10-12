@@ -1,0 +1,36 @@
+{
+    "env": {
+        "es2021": true,
+        "node": true
+    },
+    "extends":[
+      "eslint:recommended",
+      "plugin:@typescript-eslint/eslint-recommended",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "overrides": [
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": ["error", 4],
+        "quotes": [2, "single", "avoid-escape"],
+        "semi": ["error", "always"],
+        "max-len": "off",
+        "no-trailing-spaces": "error",
+        "camelcase": [
+            "error",
+            {
+                "properties": "never",
+                "ignoreDestructuring": true,
+                "ignoreImports": true
+            }
+        ],
+        "eol-last": ["error", "always"],
+        "arrow-body-style": ["error", "as-needed"],
+        "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0 }],
+        "@typescript-eslint/ban-types": "off"
+    }
+  }
