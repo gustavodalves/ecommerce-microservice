@@ -18,6 +18,9 @@ export default class CreateOrder {
 
         for (const productId of input.productsIds) {
             const product = await this.productRepository.getById(productId);
+
+            if(!product) throw new Error(`Product ${productId} not exists`);
+
             products.push(product);
         }
 

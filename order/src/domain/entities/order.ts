@@ -8,10 +8,10 @@ import { OrderPayConfirmed } from '../events/order-pay-confirmed';
 import Product from './product';
 
 export enum OrderStatus {
-  PENDING,
-  PAID,
-  CANCELLED,
-  PROCESSING,
+  PENDING = 1,
+  PAID = 2,
+  CANCELLED = 3,
+  PROCESSING = 4,
 }
 
 export class OrderId extends UUID {}
@@ -67,6 +67,6 @@ export class Order extends AggregateRoot {
 
     cancel() {
         this.status = OrderStatus.CANCELLED;
-        // this.addEvent(new OrderCancelled(this.id.getValue(), this.status));
+        this.addEvent(new OrderCancelled(this.id.getValue(), this.status));
     }
 }

@@ -7,6 +7,9 @@ import OrderPaymentProcessed from './application/usecase/OrderPaymentProcessed';
 import CreateOrder from './application/usecase/CreateOrder';
 import { DomainEventManagerAdapter } from './infra/event/EventManager';
 import PurchaseOrder from './application/usecase/PurchaseOrder';
+import { PrismaClient } from '@prisma/client';
+import PrismaOrderRepository from './infra/repositories/prisma/OrderRepository';
+import PrismaProductRepository from './infra/repositories/prisma/ProductRepository';
 
 async function main () {
     const app = express();
@@ -15,9 +18,10 @@ async function main () {
     await queue.connect();
 
     const eventManager = new DomainEventManagerAdapter(queue);
+    const prismaClient = new PrismaClient({ log: ['query'] });
 
-    const orderRepository = new FakeOrderRepository();
-    const productRepository = new FakeProductRepository();
+    const orderRepository = new PrismaOrderRepository(prismaClient);
+    const productRepository = new PrismaProductRepository(prismaClient);
 
     const orderPaymentProcessed = new OrderPaymentProcessed(
         orderRepository,

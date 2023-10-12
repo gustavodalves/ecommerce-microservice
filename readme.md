@@ -1,4 +1,4 @@
-# Payment and Orders Microservices (Project Name)
+# Payment and Orders Microservices
 
 This is the main repository of the project housing the Payment and Orders microservices.
 
