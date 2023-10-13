@@ -1,4 +1,4 @@
-import Queue from '../../application/gateways/Queue';
+import Queue from './Queue';
 import ProcessPayment from '../../application/usecase/ProcessPayment';
 import OrderCreated from '../../domain/events/OrderCreated';
 import { Replace } from '../../helpers/Replace';

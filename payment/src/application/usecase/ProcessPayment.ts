@@ -1,5 +1,5 @@
-import DomainService from '../../domain/application/DomainService';
-import DomainEventManager from '../../domain/application/EventManager';
+import DomainService from '../../domain/service/DomainService';
+import DomainEventManager from '../../domain/service/EventManager';
 import Transaction from '../../domain/entities/Transaction';
 import { TransactionRepository } from '../../domain/repositories/Transaction';
 import PaymentGateway from '../gateways/Payment';

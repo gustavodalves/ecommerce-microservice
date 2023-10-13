@@ -1,4 +1,4 @@
-import Queue from '../../application/gateways/Queue';
+import Queue from '../queue/Queue';
 import AggregateRoot from '../../core/building-blocks/aggregate-root';
 import DomainEvent from '../../core/building-blocks/domain-event';
 import DomainEventManager from '../../domain/application/EventManager';
