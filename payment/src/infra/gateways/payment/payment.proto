@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+service PaymentService {
+  rpc Pay(PaymentItem) returns (PaymentResponseItem) {}
+}
+
+message PaymentItem {
+  float value = 1;
+  string creditCardToken = 2;
+}
+
+message PaymentResponseItem {
+  string tid = 1;
+  string status = 2;
+}
