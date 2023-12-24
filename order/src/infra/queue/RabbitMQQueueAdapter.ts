@@ -1,6 +1,6 @@
 import amqplib from 'amqplib';
-import Queue from '../../application/gateways/Queue';
 import DomainEvent from '../../core/building-blocks/domain-event';
+import Queue from './Queue';
 
 export default class RabbitMQQueueAdapter implements Queue {
     connection: any;
