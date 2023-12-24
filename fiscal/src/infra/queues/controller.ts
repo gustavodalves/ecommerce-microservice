@@ -1,8 +1,5 @@
-import OrderPaymentProcessed from "../../../../order/src/application/usecase/OrderPaymentProcessed";
-import ProcessPayment from "../../../../order/src/domain/events/processed-payment";
 import { Replace } from "../../../../order/src/helpers/Replace";
 import { InvoiceService } from "../../application/service/invoice";
-import { DomainEvent } from "../../domain/events/domain-event";
 import Queue from "./queue";
 
 class PaymentProcessed {
